@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zigy/constants/constants.dart';
+import 'package:zigy/services/communications.dart';
 import 'package:zigy/services/services.dart';
 import 'package:zigy/widgets/widgets.dart';
 
@@ -39,9 +40,12 @@ class _DashBoardState extends State<DashBoard> {
           child: Column(
             children: [
               BackBar(
-                icon: Icons.menu,
+                icon: Icons.message,
                 onPressed: () {
-                  Scaffold.of(context).openDrawer();
+                  CommunicationServices().showSnackBar(
+                    "This doesn't do anything. It's just for testing the Snackbar",
+                    context,
+                  );
                 },
                 text: "Home",
               ),
