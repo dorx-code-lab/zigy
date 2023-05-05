@@ -1,6 +1,8 @@
 # zigy
 
-A new Flutter project.
+This project is a showcase of my attempt at integrating the Reqres API for dummy data into a Flutter UI. 
+
+It has basic functionality eg Viewing all users and adding your own user.
 
 ## Getting Started
 

@@ -12,7 +12,14 @@ class ApiController extends GetxController {
   var isLoading = false.obs;
   var idle = true.obs;
 
-  List<UserModel> searchedMovies = <UserModel>[].obs;
+  List<UserModel> foundUsers = <UserModel>[].obs;
+
+  clearAndReset() {
+    isLoading(true);
+    foundUsers.clear();
+
+    isLoading(false);
+  }
 
   getPaginatedUsers(int pageCount) async {
     idle(false);
@@ -26,7 +33,7 @@ class ApiController extends GetxController {
           users.totalPageCount,
         );
 
-        searchedMovies.add(userModel);
+        foundUsers.add(userModel);
       }
     }
 
@@ -37,7 +44,6 @@ class ApiController extends GetxController {
 
 Uri requestUri({
   @required String requestType,
-  @required Map<String, String> moreParams,
 }) {
   return Uri.parse(
     "$rootApi/api/$requestType",
@@ -47,11 +53,29 @@ Uri requestUri({
 class ApiService {
   static var client = http.Client();
 
+  Future<int> createUser(String name, String job) async {
+    http.Response response = await client.post(
+      requestUri(
+        requestType: users,
+      ),
+      body: {
+        "name": name,
+        "job": job,
+      },
+    );
 
-  static Future<UserModel> getGameDetail(int id) async {
+    if (response.statusCode == 201) {
+      var data = jsonDecode(response.body);
+
+      return int.parse(data[UserModel.ID]);
+    } else {
+      return null;
+    }
+  }
+
+  static Future<UserModel> getUserDetail(int id) async {
     http.Response response = await client.get(
       requestUri(
-        moreParams: null,
         requestType: "$users/$id",
       ),
     );
@@ -84,7 +108,6 @@ class ApiService {
   ) async {
     http.Response response = await client.get(
       requestUri(
-        moreParams: null,
         requestType: "$users?page=$page",
       ),
     );

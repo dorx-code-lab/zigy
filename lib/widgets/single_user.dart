@@ -25,7 +25,7 @@ class _SingleUserState extends State<SingleUser> {
   Widget build(BuildContext context) {
     return widget.userModel == null
         ? FutureBuilder(
-            future: ApiService.getGameDetail(
+            future: ApiService.getUserDetail(
               widget.userID,
             ),
             builder: (context, snapshot) {

@@ -25,6 +25,17 @@ class MyApp extends StatelessWidget {
       title: capitalizedAppName,
       theme: ThemeData(
         primarySwatch: primaryColor,
+        inputDecorationTheme: InputDecorationTheme(
+          contentPadding: EdgeInsets.only(
+            top: 10,
+            bottom: 10,
+            left: 10,
+            right: 10,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+        ),
       ),
       navigatorKey: NavigationService.navigatorKey,
       home: SplashScreenView(),
