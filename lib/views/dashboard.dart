@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:zigy/constants/constants.dart';
 import 'package:zigy/services/communications.dart';
 import 'package:zigy/services/services.dart';
+import 'package:zigy/views/no_data_found_view.dart';
 import 'package:zigy/widgets/widgets.dart';
 
 import '../widgets/add_new_user.dart';
@@ -54,10 +55,8 @@ class _DashBoardState extends State<DashBoard> {
                   return Stack(
                     children: [
                       searchController.foundUsers.isEmpty
-                          ? Center(
-                              child: Text(
-                                'No Movie Found',
-                              ),
+                          ? NoDataFound(
+                              text: "No users found",
                             )
                           : ListView(
                               padding: EdgeInsets.symmetric(
